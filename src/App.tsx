@@ -6,6 +6,12 @@ import Header from './components/Header/Header';
 
 function App() {
 	const [toggleCourseComponent, setToggleCourseComponent] = useState(true);
+	const [newCourseComponent, setNewCourseComponent] = useState(null);
+
+	const handleFormSubmit = (data) => {
+		setNewCourseComponent(data);
+		setToggleCourseComponent(!toggleCourseComponent);
+	};
 
 	return (
 		<>
@@ -14,12 +20,13 @@ function App() {
 
 				{toggleCourseComponent ? (
 					<Courses
+						newCourse={newCourseComponent}
 						handleAddCourse={() =>
 							setToggleCourseComponent(!toggleCourseComponent)
 						}
 					></Courses>
 				) : (
-					<CreateCourse></CreateCourse>
+					<CreateCourse handleFormSubmit={handleFormSubmit}></CreateCourse>
 				)}
 			</div>
 		</>

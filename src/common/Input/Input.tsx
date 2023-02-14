@@ -7,6 +7,7 @@ function Input(props) {
 			<input
 				type='text'
 				className='form-control'
+				name={props.input.name}
 				placeholder={props.input.placeholder}
 			/>
 		</>

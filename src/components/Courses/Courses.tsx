@@ -3,7 +3,7 @@ import { mockedAuthorsList, mockedCoursesList } from 'src/constants';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
-function Courses({ handleAddCourse }) {
+function Courses({ newCourse, handleAddCourse }) {
 	const [filteredCourse, setFilteredCourse] = useState([]);
 
 	const getCourses = () => {
@@ -20,7 +20,8 @@ function Courses({ handleAddCourse }) {
 	};
 
 	useEffect(() => {
-		setFilteredCourse(getCourses());
+		if (newCourse) setFilteredCourse([newCourse, ...getCourses()]);
+		else setFilteredCourse(getCourses());
 	}, []);
 
 	const applySearch = (text) => {
@@ -32,7 +33,7 @@ function Courses({ handleAddCourse }) {
 	};
 
 	const resetSearch = () => {
-		setFilteredCourse(getCourses());
+		setFilteredCourse(filteredCourse);
 	};
 
 	return (

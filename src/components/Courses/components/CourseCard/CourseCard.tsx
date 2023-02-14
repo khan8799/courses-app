@@ -8,11 +8,11 @@ function CourseCard(props) {
 	return (
 		<>
 			<div className='row border border-primary mb-4'>
-				<div className='col-md-8 p-4'>
+				<div className='col-md-7 p-4'>
 					<h1 className='mb-4'>{props.author.title}</h1>
 					<p>{props.author.description}</p>
 				</div>
-				<div className='col-md-4 p-4'>
+				<div className='col-md-5 p-4'>
 					<ul className='list-unstyled'>
 						<li className='mb-2'>
 							<strong>Authors: </strong>
