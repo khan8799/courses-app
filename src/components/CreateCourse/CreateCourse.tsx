@@ -11,6 +11,15 @@ function CreateCourse({ handleFormSubmit }) {
 	const [bookAuthors, setbookAuthors] = useState([]);
 	const authorInputRef = useRef(null);
 
+	const [title, setTitle] = useState('');
+	const [titleError, setTitleError] = useState(false);
+
+	const [description, setDescription] = useState('');
+	const [descriptionError, setDescriptionError] = useState(false);
+
+	const [duration, setDuration] = useState('');
+	const [durationError, setDurationError] = useState(false);
+
 	useEffect(() => {
 		setAuthors(mockedAuthorsList);
 	}, []);
@@ -35,6 +44,11 @@ function CreateCourse({ handleFormSubmit }) {
 		try {
 			event.preventDefault();
 
+			if (!title) setTitleError(true);
+			if (!duration) setDurationError(true);
+			if (!description) setDescriptionError(true);
+			if (!title || !duration || !description) return;
+
 			const data = new FormData(event.currentTarget);
 			const formData = {
 				id: randomString(30),
@@ -50,6 +64,24 @@ function CreateCourse({ handleFormSubmit }) {
 		}
 	};
 
+	const handleTitleInputChange = (e) => {
+		if (!e.target.value) setTitleError(true);
+		else setTitleError(false);
+		setTitle(e.target.value);
+	};
+
+	const handleDescriptionInputChange = (e) => {
+		if (!e.target.value) setDescriptionError(true);
+		else setDescriptionError(false);
+		setDescription(e.target.value);
+	};
+
+	const handleDurationInputChange = (e) => {
+		if (!e.target.value) setDurationError(true);
+		else setDurationError(false);
+		setDuration(e.target.value);
+	};
+
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
@@ -61,7 +93,13 @@ function CreateCourse({ handleFormSubmit }) {
 								name: 'title',
 								placeholder: 'Enter Title',
 							}}
+							handleChange={handleTitleInputChange}
 						></Input>
+						{titleError ? (
+							<span className='text-danger'>Title is required</span>
+						) : (
+							''
+						)}
 					</div>
 					<div className='col-md-4 text-end'>
 						<Button
@@ -79,7 +117,13 @@ function CreateCourse({ handleFormSubmit }) {
 							className='form-control'
 							id='exampleFormControlTextarea1'
 							rows={4}
+							onChange={handleDescriptionInputChange}
 						></textarea>
+						{descriptionError ? (
+							<span className='text-danger'>Description is required</span>
+						) : (
+							''
+						)}
 					</div>
 				</div>
 
@@ -110,9 +154,16 @@ function CreateCourse({ handleFormSubmit }) {
 									input={{
 										label: 'Duration',
 										name: 'duration',
+										type: 'number',
 										placeholder: 'Enter Duration in minutes',
 									}}
+									handleChange={handleDurationInputChange}
 								></Input>
+								{durationError ? (
+									<span className='text-danger'>Duration is required</span>
+								) : (
+									''
+								)}
 							</div>
 						</div>
 					</div>
