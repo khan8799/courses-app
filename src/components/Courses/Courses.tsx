@@ -24,23 +24,21 @@ function Courses({ newCourse, handleAddCourse }) {
 		else setFilteredCourse(getCourses());
 	}, []);
 
-	const applySearch = (text) => {
+	const applySearch = (text: string) => {
 		setFilteredCourse(
-			filteredCourse.filter((course) =>
-				course.title.toLowerCase().includes(text.toLowerCase())
+			filteredCourse.filter(
+				(course) =>
+					course.title.toLowerCase().includes(text.toLowerCase()) ||
+					course.id.toLowerCase().includes(text.toLowerCase())
 			)
 		);
-	};
-
-	const resetSearch = () => {
-		setFilteredCourse(filteredCourse);
 	};
 
 	return (
 		<>
 			<SearchBar
 				applySearch={applySearch}
-				resetSearch={resetSearch}
+				resetSearch={() => setFilteredCourse(getCourses())}
 				addCourse={() => handleAddCourse()}
 			></SearchBar>
 			{filteredCourse.map((course) => (

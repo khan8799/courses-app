@@ -1,10 +1,12 @@
 import React from 'react';
 import Button from 'src/common/Button/Button';
+import { timeConvert } from 'src/helpers/getCourseDuration';
 
 function CourseCard(props) {
 	const showCourseButton = {
 		text: 'Show Course',
 	};
+	const duration = timeConvert(props.author.duration);
 	return (
 		<>
 			<div className='row border border-primary mb-4'>
@@ -20,7 +22,7 @@ function CourseCard(props) {
 						</li>
 						<li className='mb-2'>
 							<strong>Duration: </strong>
-							{props.author.duration}
+							{duration}
 						</li>
 						<li className='mb-2'>
 							<strong>Created: </strong>

@@ -15,27 +15,6 @@ function CreateCourse({ handleFormSubmit }) {
 		setAuthors(mockedAuthorsList);
 	}, []);
 
-	const saveButton = {
-		text: 'Create Course',
-		type: 'submit',
-	};
-
-	const createAuthorButton = {
-		text: 'Create Author',
-	};
-
-	const titleInput = {
-		label: 'Title',
-		name: 'title',
-		placeholder: 'Enter Title',
-	};
-
-	const durationInput = {
-		label: 'Duration',
-		name: 'duration',
-		placeholder: 'Enter Duration in minutes',
-	};
-
 	const addAuthors = (bookAuthor) => {
 		setbookAuthors((old) => [...old, bookAuthor]);
 
@@ -76,11 +55,17 @@ function CreateCourse({ handleFormSubmit }) {
 			<form onSubmit={handleSubmit}>
 				<div className='row justify-content-between mb-4 px-4'>
 					<div className='col-md-4'>
-						<Input input={titleInput}></Input>
+						<Input
+							input={{
+								label: 'Title',
+								name: 'title',
+								placeholder: 'Enter Title',
+							}}
+						></Input>
 					</div>
 					<div className='col-md-4 text-end'>
 						<Button
-							button={saveButton}
+							button={{ text: 'Create Course', type: 'submit' }}
 							handleClick={() => console.log('form')}
 						></Button>
 					</div>
@@ -113,7 +98,7 @@ function CreateCourse({ handleFormSubmit }) {
 
 							<div className='mt-3 text-center'>
 								<Button
-									button={createAuthorButton}
+									button={{ text: 'Create Author' }}
 									handleClick={onCreateAuthor}
 								></Button>
 							</div>
@@ -121,7 +106,13 @@ function CreateCourse({ handleFormSubmit }) {
 						<div>
 							<h3 className=' text-center'>Duration</h3>
 							<div>
-								<Input input={durationInput}></Input>
+								<Input
+									input={{
+										label: 'Duration',
+										name: 'duration',
+										placeholder: 'Enter Duration in minutes',
+									}}
+								></Input>
 							</div>
 						</div>
 					</div>

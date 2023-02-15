@@ -3,27 +3,6 @@ import Button from 'src/common/Button/Button';
 
 function SearchBar({ applySearch, resetSearch, addCourse }) {
 	const inputRef = useRef(null);
-	const searchButton = {
-		text: 'Search',
-		color: 'primary',
-	};
-
-	const addCourseButton = {
-		text: 'Add new course',
-		color: 'success',
-	};
-
-	const handleSearchInput = () => {
-		applySearch(inputRef.current.value);
-	};
-
-	const handleChangeInput = () => {
-		resetSearch();
-	};
-
-	const handleAddCourse = () => {
-		addCourse();
-	};
 
 	return (
 		<>
@@ -36,16 +15,28 @@ function SearchBar({ applySearch, resetSearch, addCourse }) {
 							type='search'
 							placeholder='Search'
 							aria-label='Search'
-							onChange={handleChangeInput}
 						/>
 						<Button
-							button={searchButton}
-							handleClick={handleSearchInput}
+							button={{
+								text: 'Search',
+								color: 'primary',
+							}}
+							handleClick={() => applySearch(inputRef.current.value)}
+						></Button>
+						<Button
+							button={{
+								text: 'Clear',
+								color: 'danger',
+							}}
+							handleClick={() => resetSearch()}
 						></Button>
 					</div>
 					<Button
-						button={addCourseButton}
-						handleClick={handleAddCourse}
+						button={{
+							text: 'Add new course',
+							color: 'success',
+						}}
+						handleClick={() => addCourse()}
 					></Button>
 				</div>
 			</nav>
