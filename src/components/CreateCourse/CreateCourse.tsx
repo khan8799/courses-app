@@ -4,6 +4,7 @@ import Input from 'src/common/Input/Input';
 import { mockedAuthorsList } from 'src/constants';
 import { getCurrentDate } from 'src/helpers/formatCreationDate';
 import { randomString } from 'src/helpers/generateRandomString';
+import AuthorItem from './components/AuthorItem/AuthorItem';
 
 function CreateCourse({ handleFormSubmit }) {
 	const [authors, setAuthors] = useState([]);
@@ -21,10 +22,6 @@ function CreateCourse({ handleFormSubmit }) {
 
 	const createAuthorButton = {
 		text: 'Create Author',
-	};
-
-	const addAuthor = {
-		text: 'Add Author',
 	};
 
 	const titleInput = {
@@ -134,20 +131,11 @@ function CreateCourse({ handleFormSubmit }) {
 							<h3 className='text-center'>Authors</h3>
 
 							{authors.map((author) => (
-								<div
+								<AuthorItem
 									key={author.id}
-									className='row justify-content-around mt-4'
-								>
-									<div className='col-auto text-left'>
-										<label>{author.name}</label>
-									</div>
-									<div className='col-auto'>
-										<Button
-											button={addAuthor}
-											handleClick={() => addAuthors(author.name)}
-										></Button>
-									</div>
-								</div>
+									author={author}
+									handleAddAuthor={addAuthors}
+								></AuthorItem>
 							))}
 						</div>
 						<div>
