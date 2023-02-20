@@ -10,6 +10,7 @@ function CreateCourse({ handleFormSubmit }) {
 	const [authors, setAuthors] = useState([]);
 	const [bookAuthors, setbookAuthors] = useState([]);
 	const authorInputRef = useRef(null);
+	const [authorInputRefError, setAuthorInputRefError] = useState(false);
 
 	const [title, setTitle] = useState('');
 	const [titleError, setTitleError] = useState(false);
@@ -31,6 +32,9 @@ function CreateCourse({ handleFormSubmit }) {
 	};
 
 	const onCreateAuthor = () => {
+		if (!authorInputRef.current.value) return setAuthorInputRefError(true);
+		else setAuthorInputRefError(false);
+
 		setAuthors((old) => [
 			{
 				name: authorInputRef.current.value,
@@ -138,6 +142,11 @@ function CreateCourse({ handleFormSubmit }) {
 									type='text'
 									placeholder='Enter Author Name'
 								/>
+								{authorInputRefError ? (
+									<span className='text-danger'>Author name is required</span>
+								) : (
+									''
+								)}
 							</div>
 
 							<div className='mt-3 text-center'>
