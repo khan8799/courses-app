@@ -1,28 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { mockedAuthorsList, mockedCoursesList } from 'src/constants';
 import CourseCard from './components/CourseCard/CourseCard';
 import SearchBar from './components/SearchBar/SearchBar';
 
-function Courses({ newCourse, handleAddCourse }) {
+function Courses({ courses, handleAddCourse }) {
 	const [filteredCourse, setFilteredCourse] = useState([]);
 
-	const getCourses = () => {
-		return mockedCoursesList.map((course) => {
-			const authorNames = [];
-			course.authors.forEach((id) => {
-				const result = mockedAuthorsList.find((author) => author.id === id);
-				if (result) authorNames.push(result.name);
-			});
-			course.authorNames = authorNames.join(', ');
-
-			return course;
-		});
-	};
-
 	useEffect(() => {
-		if (newCourse) setFilteredCourse([newCourse, ...getCourses()]);
-		else setFilteredCourse(getCourses());
-	}, []);
+		setFilteredCourse(courses);
+	}, [courses]);
 
 	const applySearch = (text: string) => {
 		setFilteredCourse(
@@ -38,7 +23,7 @@ function Courses({ newCourse, handleAddCourse }) {
 		<>
 			<SearchBar
 				applySearch={applySearch}
-				resetSearch={() => setFilteredCourse(getCourses())}
+				resetSearch={() => setFilteredCourse(courses)}
 				addCourse={() => handleAddCourse()}
 			></SearchBar>
 			{filteredCourse.map((course) => (

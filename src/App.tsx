@@ -3,13 +3,14 @@ import './App.css';
 import Courses from './components/Courses/Courses';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import Header from './components/Header/Header';
+import { CourseList } from './helpers/formatCourses';
 
 function App() {
 	const [toggleCourseComponent, setToggleCourseComponent] = useState(true);
-	const [newCourseComponent, setNewCourseComponent] = useState(null);
+	const [courses, setCourses] = useState(CourseList);
 
 	const handleFormSubmit = (data) => {
-		setNewCourseComponent(data);
+		setCourses([data, ...courses]);
 		setToggleCourseComponent(!toggleCourseComponent);
 	};
 
@@ -20,7 +21,7 @@ function App() {
 
 				{toggleCourseComponent ? (
 					<Courses
-						newCourse={newCourseComponent}
+						courses={courses}
 						handleAddCourse={() =>
 							setToggleCourseComponent(!toggleCourseComponent)
 						}
